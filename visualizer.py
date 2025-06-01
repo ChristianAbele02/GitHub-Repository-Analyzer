@@ -414,7 +414,7 @@ class VisualizationEngine:
         return fig
 
     def _create_empty_chart(self, message: str) -> go.Figure:
-        """Create empty chart with a message"""
+        """Create an empty chart with a message"""
         fig = go.Figure()
         fig.add_annotation(
             text=message,
