@@ -49,7 +49,7 @@ GITHUB_TOKEN=your_personal_access_token_here
 3. Add the token to your environment variables or `.env` file
 
 ### Basic Configuration
-The analyzer uses default settings that work for most use cases. You can modify configurations in `github_analyzer/config.py`:
+The analyzer uses default settings that work for most use cases. You can modify configurations in `config.py`
 
 - `DEFAULT_RESULTS_PER_PAGE`: Number of repositories per API request (default: 100)
 - `MAX_REPOSITORIES`: Maximum repositories to analyze (default: 1000)
