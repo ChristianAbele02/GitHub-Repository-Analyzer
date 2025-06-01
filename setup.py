@@ -44,6 +44,7 @@ setup(
     long_description=read_readme(),
     long_description_content_type="text/markdown",
     url="https://github.com/yourusername/github-repository-analyzer",
+    license="MIT",
     project_urls={
         "Bug Tracker": "https://github.com/yourusername/github-repository-analyzer/issues",
         "Documentation": "https://github.com/yourusername/github-repository-analyzer/wiki",
@@ -56,7 +57,6 @@ setup(
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
         "Intended Audience :: Science/Research",
-        "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.7",
@@ -128,9 +128,9 @@ setup(
 def post_install_message():
     print("""
 
-    🎉 GitHub Repository Analyzer installed successfully!
+    GitHub Repository Analyzer installed successfully!
 
-    📋 Next Steps:
+    Next Steps:
 
     1. Set up your GitHub token:
        export GITHUB_TOKEN="your_personal_access_token"
@@ -139,8 +139,8 @@ def post_install_message():
        echo "GITHUB_TOKEN=your_token_here" > .env
 
     3. Test your installation:
-       python -c "from github_analyzer import GitHubRepositoryAnalyzer; print('✅ Installation successful!')"
-    Happy analyzing! 🚀
+       python -c "from main import GitHubRepositoryAnalyzer; print('Installation successful!')"
+    Happy analyzing!
     """)
 def validate_setup_requirements():
     required_files = ["README.md", "requirements.txt", "LICENSE"]
