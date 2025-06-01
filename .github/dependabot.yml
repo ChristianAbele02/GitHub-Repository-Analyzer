@@ -163,7 +163,7 @@ updates:
     # Auto-merge patch security updates (optional - remove if you prefer manual review)
     # Note: Requires branch protection rules to be properly configured
     reviewers:
-      - "YOUR_GITHUB_USERNAME"  # Replace with your GitHub username
+      - "ChristianAbele02"  # Replace with your GitHub username
     
     # Custom commit messages for security
     commit-message:
