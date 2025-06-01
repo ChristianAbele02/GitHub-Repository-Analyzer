@@ -221,7 +221,7 @@ AnalysisEngine.save_all_charts("charts/")
 5. Open a Pull Request
 
 
-## 🔮 Future Enhancements
+## Future Enhancements
 
 - Real-time streaming analysis
 - Integration with GitLab and other platforms
