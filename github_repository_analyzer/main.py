@@ -123,7 +123,7 @@ class GitHubRepositoryAnalyzer:
             'correlation_matrix': self.analysis_engine.calculate_correlation_matrix().to_dict() if hasattr(self.analysis_engine, 'calculate_correlation_matrix') else {}
         }
 
-    def create_visualizations(self, save_charts: bool = True, 
+    def create_visualizations(self, save_charts: bool = False,
                             output_dir: str = "charts") -> Dict[str, Any]:
         """
         Create comprehensive visualizations

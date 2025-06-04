@@ -100,13 +100,15 @@ class VisualizationEngine:
         return fig
 
     def create_stars_vs_forks_scatter(self, color_by: str = 'language',
-                                      log_scale: bool = True) -> go.Figure:
+                                      log_scale: bool = True,
+                                      max_points: int = 1000) -> go.Figure:
         """
-        Create a scatter plot of stars vs. forks
+        Create a scatter plot of stars vs. forks with improved performance
 
         Args:
             color_by: Column to color points by
             log_scale: Whether to use logarithmic scale
+            max_points: Maximum number of points to plot
 
         Returns:
             Plotly figure object
@@ -114,36 +116,71 @@ class VisualizationEngine:
         if self.df.empty:
             return self._create_empty_chart("No repository data available")
 
-        # Filter out repositories with 0 stars or forks for a log scale
-        plot_df = self.df.copy()
+        # Filter without creating a full copy
         if log_scale:
-            plot_df = plot_df[(plot_df['stars'] > 0) & (plot_df['forks'] > 0)]
+            plot_df = self.df.loc[(self.df['stars'] > 0) & (self.df['forks'] > 0)]
+        else:
+            plot_df = self.df
 
         if plot_df.empty:
             return self._create_empty_chart("No valid data for scatter plot")
 
+        # Sample data if too large
+        original_count = len(plot_df)
+        if len(plot_df) > max_points:
+            plot_df = plot_df.sample(max_points, random_state=42)
+
+        # Create scatter plot
         fig = px.scatter(
             plot_df,
             x='stars',
             y='forks',
             color=color_by,
             hover_data=['name', 'language', 'stars', 'forks'],
-            title='Repository Stars vs Forks',
+            title=f'Repository Stars vs Forks (showing {len(plot_df)} of {original_count} repos)',
             labels={'stars': 'Stars', 'forks': 'Forks'},
             log_x=log_scale,
             log_y=log_scale
         )
 
-        # Add trend line
+        # Add proper trend line using numpy
         if len(plot_df) > 1:
-            fig.add_scatter(
-                x=plot_df['stars'],
-                y=plot_df['forks'],
-                mode='lines',
-                name='Trend',
-                line=dict(dash='dash', color='red'),
-                showlegend=False
-            )
+            import numpy as np
+
+            # For log scale, use log values for calculation
+            x_vals = np.log10(plot_df['stars']) if log_scale else plot_df['stars'].values
+            y_vals = np.log10(plot_df['forks']) if log_scale else plot_df['forks'].values
+
+            # Only use finite values
+            valid_mask = np.isfinite(x_vals) & np.isfinite(y_vals)
+            if sum(valid_mask) > 1:  # Need at least 2 points for regression
+                x_valid = x_vals[valid_mask]
+                y_valid = y_vals[valid_mask]
+
+                # Linear regression
+                z = np.polyfit(x_valid, y_valid, 1)
+                slope, intercept = z
+
+                # Generate x points for the line
+                x_range = np.linspace(min(x_valid), max(x_valid), 100)
+                y_range = slope * x_range + intercept
+
+                # Convert back from log if needed
+                if log_scale:
+                    x_range = 10 ** x_range
+                    y_range = 10 ** y_range
+
+                # Add trend line
+                fig.add_trace(
+                    go.Scatter(
+                        x=x_range,
+                        y=y_range,
+                        mode='lines',
+                        name='Trend Line',
+                        line=dict(color='red', dash='dash'),
+                        showlegend=True
+                    )
+                )
 
         return fig
 
