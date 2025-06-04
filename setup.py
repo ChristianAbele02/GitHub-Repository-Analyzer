@@ -36,19 +36,19 @@ def get_version():
 
 # Package metadata
 setup(
-    name="github-repository-analyzer",
+    name="GitHubRepositoryAnalyzer",
     version=get_version(),
-    author="Your Name",
-    author_email="your.email@example.com",
+    author="Christian Abele",
+    author_email="christian.abele@uni-bielefeld.de",
     description="A comprehensive tool for analyzing GitHub repositories and predicting development trends",
     long_description=read_readme(),
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/github-repository-analyzer",
+    url="https://github.com/ChristianAbele02/Github-Repository-Analyzer",
     license="MIT",
     project_urls={
-        "Bug Tracker": "https://github.com/yourusername/github-repository-analyzer/issues",
-        "Documentation": "https://github.com/yourusername/github-repository-analyzer/wiki",
-        "Source Code": "https://github.com/yourusername/github-repository-analyzer",
+        "Bug Tracker": "https://github.com/ChristianABele02/Github-Repository-Analyzer/issues",
+        "Documentation": "https://github.com/ChristianAbele02/Github-Repository-Analyzer/wiki",
+        "Source Code": "https://github.com/ChristianAbele02/Github-Repository-Analyzer",
     },
 
     # Package configuration

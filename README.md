@@ -60,8 +60,9 @@ The analyzer uses default settings that work for most use cases. You can modify 
 ### Basic Usage
 
 ```python
-import main
-from main import GitHubRepositoryAnalyzer
+
+from github_repository_analyzer import main
+from github_repository_analyzer.main import GitHubRepositoryAnalyzer
 from visualizer import VisualizationEngine
 
 # Initialize the analyzer
