@@ -169,18 +169,3 @@ updates:
     commit-message:
       prefix: "security"
       include: "scope"
-
-# Configuration Notes:
-# 1. Replace "YOUR_GITHUB_USERNAME" with your actual GitHub username
-# 2. This configuration assumes you have:
-#    - requirements.txt for dependencies
-#    - setup.py or pyproject.toml for package definition
-#    - .github/workflows/ directory with GitHub Actions
-# 3. Schedule timing is optimized to:
-#    - Security updates: Daily at 6 AM UTC (highest priority)
-#    - Python deps: Weekly Monday 9 AM UTC (start of week)
-#    - GitHub Actions: Weekly Tuesday 10 AM UTC (after Python deps)
-# 4. Groups are designed to minimize breaking changes while keeping related dependencies together
-# 5. Major version updates are ignored by default for stability - review these manually
-# 6. Adjust open-pull-requests-limit based on your review capacity
-# 7. Remove auto-merge settings if you prefer to review all updates manually
